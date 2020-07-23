@@ -8,10 +8,107 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
- <h1 class="text-center">Welcome To Chandpur Bank</h1>
+  <div id="entry-page">
+      <h1 class="text-center">Welcome To Chandpur Bank</h1>
+      <div class="login-area">
+         <h4>Login</h4>
+         <input class="form-control" type="email" placeholder="Email">
+         <br>
+         <input class="form-control" type="password" placeholder="Password  ">
+         <br>
+         <button id="enterbtn" class="btn btn-success">Enter</button>
+      </div>
+  </div>    
+   <div id="transaction-area">
+      <div class="row">
+          <div class="col-md-4">
+             <div class="display deposit">
+                <h5>Deposit</h5>
+                <h2>$ <span id="deposit-display">00</span></h2>
+             </div>
+          </div>
+          <div class="col-md-4">
+             <div class="display withdraw">
+                <h5>Withdraw</h5>
+                <h2>$ <span id="withdraw-display">00</span> </h2>
+             </div>
+          </div>
+          <div class="col-md-4">
+             <div class="display balance">
+                <h5>Balance</h5>
+                <h2>$<span id="balance-display">1240</span></h2>
+             </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6">
+             <div class="login-area">
+                <h2>Deposit</h2>
+                <input id="depositvalue" class="form-control" type="number" placeholder="$ amount you want to deposit">
+                <br>
+                <button id="depositbtn" class="btn btn-success">Deposit</button>
+             </div>
+          </div>
+          <div class="col-md-6">
+           <div class="login-area">
+            <h2>Withdraw</h2>
+            <input id="withdrawValue"  class="form-control" type="number" placeholder="$ amount you want to withdraw">
+            <br>
+            <button id="withdrawbtn" class="btn btn-success">Withdraw</button>
+           </div>
+        </div>
+      </div>
+   </div>
+
+   <script>
+        //    enterbtn event handler
+       var enterbtn = document.getElementById("enterbtn");
+       
+        enterbtn.addEventListener("click",function(){
+           var loginArea = document.getElementById("entry-page");
+           loginArea.style.display="none"
+           var transactionArea = document.getElementById("transaction-area");
+           transactionArea.style.display = "block"
+       })
+    // depositbtn event handler
     
+     var depositbtn = document.getElementById("depositbtn");
+      depositbtn.addEventListener("click",function(){
+          var depositValue = document.getElementById("depositvalue").value;
+          var depositNumber = parseFloat(depositValue);
+        
+         addSpanText("deposit-display",depositNumber)
+         addSpanText("balance-display",depositNumber)
+        
+
+          document.getElementById("depositvalue").value = "";
+
+          
+
+      })
+      // withdraw button event handler
+       withdrawbtn = document.getElementById("withdrawbtn");
+       withdrawbtn.addEventListener("click",function(){
+         var withdrawValue = document.getElementById("withdrawValue").value;
+         var withdrawNumber = parseFloat(withdrawValue);
+         addSpanText("withdraw-display",withdrawNumber)
+         addSpanText("balance-display",-1*withdrawNumber)
+
+         document.getElementById("withdrawValue").value = ""; 
+       })
 
 
+      function addSpanText(id,currentNumber){
+            var oldValue= document.getElementById(id).innerText;
+            var oldNumber  = parseFloat(oldValue);
+            var total = currentNumber+oldNumber;
+            document.getElementById(id).innerText = total;
+
+         }
+       
+       
+       
+   </script>
    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> 
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
